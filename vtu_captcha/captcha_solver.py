@@ -11,7 +11,7 @@ TESSERACT_CONFIG = f"--psm 8 -l eng -c tessedit_char_whitelist={WHITELISTED_CHAR
 
 
 class VTUCaptchaSolver(object):
-    CAPTCHA_BASE_IMAGE_PATH = "vtu_captcha_base.png"
+    CAPTCHA_BASE_IMAGE_PATH = "vtu_captcha/vtu_captcha_base.png"
     # noinspection PyTypeChecker
     base_arr = np.asarray(Image.open(CAPTCHA_BASE_IMAGE_PATH))
     NOISE_FILL = [255, 255, 255]
