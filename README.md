@@ -1,1 +1,1 @@
-# vtu-captcha-solver
+# VTU Results Scraper

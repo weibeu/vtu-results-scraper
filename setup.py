@@ -19,16 +19,16 @@ def __get_requirements():
 requirements = __get_requirements()
 version = __get_version()
 setuptools.setup(
-    name="vtu-captcha-solver",
+    name="vtu-results-scraper",
     version=version,
     author="Weibeu",
     author_email="deepakrajko14@gmail.com",
     description="VTU captcha solver",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/weibeu/vtu-captcha-solver",
+    url="https://github.com/weibeu/vtu-results-scraper",
     project_urls={
-        "Bug Tracker": "https://github.com/weibeu/vtu-captcha-solver/issues",
+        "Bug Tracker": "https://github.com/weibeu/vtu-results-scraper/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
