@@ -55,7 +55,8 @@ class VTUResultScraper(object):
         try:
             _, usn, _, student_name, *_ = (str().join(x.itertext()) for x in tree.xpath('//table[1]/tr/td'))
             result_tables = tree.xpath('//div[@class="divTable"]')[:-1]
-            results = [table_to_dict(t) for t in result_tables]
+            sems = [rt.getparent().xpath('.//div/b')[0].text.split(":")[-1].strip() for rt in result_tables]
+            results = [{"semester": s, "result": table_to_dict(t)} for s, t in zip(sems, result_tables)]
         except (IndexError, KeyError, ValueError):
             raise VTUIsDownException
         else:
@@ -75,3 +76,8 @@ class VTUResultScraper(object):
             except VTUResultsScraperBaseException:
                 continue
         raise VTUResultsScraperBaseException
+
+    @classmethod
+    def get_results_from_usn(cls, usn):
+        self = cls(usn)
+        return self.get_results()
