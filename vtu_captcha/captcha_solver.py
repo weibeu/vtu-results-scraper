@@ -28,9 +28,8 @@ class VTUCaptchaSolver(object):
     def remove_noise(self):
         for i, j in self.captcha_pixels():
             base_pixel = self.base_arr[i][j]
-            captcha_pixel = self.captcha_arr[i][j]
-            # noinspection PyUnresolvedReferences
-            if tuple(base_pixel) != tuple(captcha_pixel):
+            captcha_pixel = tuple(self.captcha_arr[i][j])
+            if captcha_pixel != tuple(base_pixel) and len(set(captcha_pixel)) == 1:
                 continue
             self.captcha_arr[i][j] = self.NOISE_FILL
 
