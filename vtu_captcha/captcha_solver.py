@@ -21,16 +21,18 @@ class VTUCaptchaSolver(object):
         # noinspection PyTypeChecker
         self.captcha_arr = np.asarray(Image.open(io.BytesIO(self.captcha_bytes)))
 
+    def captcha_pixels(self):
+        shape = self.captcha_arr.shape
+        yield from ((i, j) for i in range(shape[0]) for j in range(shape[1]))
+
     def remove_noise(self):
-        shape = self.base_arr.shape
-        for i in range(shape[0]):
-            for j in range(shape[1]):
-                base_pixel = self.base_arr[i][j]
-                captcha_pixel = self.captcha_arr[i][j]
-                # noinspection PyUnresolvedReferences
-                if (base_pixel != captcha_pixel).all():
-                    continue
-                self.captcha_arr[i][j] = self.NOISE_FILL
+        for i, j in self.captcha_pixels():
+            base_pixel = self.base_arr[i][j]
+            captcha_pixel = self.captcha_arr[i][j]
+            # noinspection PyUnresolvedReferences
+            if tuple(base_pixel) != tuple(captcha_pixel):
+                continue
+            self.captcha_arr[i][j] = self.NOISE_FILL
 
     def solve(self):
         self.remove_noise()
